@@ -18,6 +18,8 @@ services:
 
   postgres:
     image: postgres:10.4
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
     ports:
       - "35432:5432"
     environment:
