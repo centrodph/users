@@ -2,16 +2,26 @@ Url: [https://backusers.herokuapp.com/](https://backusers.herokuapp.com/)
 
 ## setup steps
 
-[X] Setup a basic backend using typescript, nodejs, expressJS
-[ ] Setup  basic expressJS that respond JSON
-[ ] Setup docker
-[ ] Config `pg` and test the heroku DB
-[ ] Create a user table
-[ ] Create a endpoint users to retrieve the users table
-[ ] Deploy to heroku/aws
+- [X] Setup a basic backend using typescript, nodejs, expressJS
 
-## setup steps
+- [X] Setup  basic expressJS that respond JSON
 
+- [X] Setup docker
+
+- [X] Config `pg`
+
+- [X] Create a user table
+
+- [X] Create a endpoint users to retrieve the users table
+
+- [ ] Deploy to heroku/aws
+
+## application steps
+
+
+
+
+## application steps
 
 
 
