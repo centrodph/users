@@ -1,0 +1,4 @@
+module.exports.createUsers = "\nDROP TABLE users;\nCREATE SEQUENCE IF NOT EXISTS users_id_seq;\nCREATE TABLE IF NOT EXISTS users (\n  id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),\n  email text UNIQUE,\n  password text\n);\n";
+module.exports.createIndexUsers = "\nCREATE INDEX IF NOT EXISTS users_email_idx on users (email);\n";
+module.exports.addBasicUsers = "\n  INSERT INTO users VALUES (1,'admin@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n  INSERT INTO users VALUES (2,'supervisor@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n  INSERT INTO users VALUES (3,'operator@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n";
+//# sourceMappingURL=createTables.js.map

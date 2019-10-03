@@ -1,9 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
+import express from 'express';
+import { listUsers } from './model/query';
+import { db } from './model/setup';
 
 const app = express();
 const port = process.env.PORT || 5000;
-const pool = require('./model/setup');
 
 /**
  * Setup body parser
@@ -29,9 +30,9 @@ app.get('/', (request, response) => {
 /**
  * Users
  */
-app.get('/users', (request, response) => {
-
-  response.send('hot');
+app.get('/users', async (request, response) => {
+  const { rows } = await db.query(listUsers());
+  response.send(rows);
 });
 
 app.listen(port);

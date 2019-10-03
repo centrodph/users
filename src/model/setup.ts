@@ -1,4 +1,10 @@
-const { Pool } = require("pg");
+import { Pool } from 'pg';
+
+const {
+  createUsers,
+  createIndexUsers,
+  addBasicUsers,
+} = require("../migrations/createTables");
 
 const db = new Pool({
   max: 10,
@@ -6,23 +12,17 @@ const db = new Pool({
 });
 
 const setupDB = async () => {
-  const client = await db.connect();
+  try {
+    const client = await db.connect();
 
-  await client.query(`
-    CREATE TABLE IF NOT EXISTS users (
-      id uuid PRIMARY KEY,
-      email text UNIQUE,
-      password text
-    );
-    `);
-
-  await client.query(`
-    CREATE INDEX IF NOT EXISTS users_email_idx on users (email);
-    `);
-
-  await client.release(true);
+    await client.query(createUsers);
+    await client.query(createIndexUsers);
+    await client.query(addBasicUsers);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 setupDB();
 
-module.exports.db = db;
+export { db };
