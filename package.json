@@ -1,0 +1,36 @@
+{
+  "name": "usersapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "ts-node ./src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centrodph/users.git"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "express"
+  ],
+  "author": "Gerardo Perrucci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/centrodph/users/issues"
+  },
+  "homepage": "https://github.com/centrodph/users#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
+  },
+  "devDependencies": {
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "^3.6.3"
+  }
+}
