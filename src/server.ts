@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+// import cors from 'cors';
 import express from 'express';
 import { listUsers } from './model/query';
 import { db } from './model/setup';
@@ -10,7 +11,12 @@ const port = process.env.PORT || 5000;
  * Setup body parser
  */
 app.use(bodyParser.json());
-
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}));
 /**
  * Dummy Json
  */

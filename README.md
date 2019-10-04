@@ -30,3 +30,15 @@ Url: [https://backusers.herokuapp.com/](https://backusers.herokuapp.com/)
 1. npm i
 2. docker-compose up --build
 3. npm run watch-node (dev) or npm run start
+
+
+## issues
+
+if you get an error when you run docker-composer up --build
+
+```
+
+docker exec -it <container-name> /bin/bash
+$ npm install
+
+```

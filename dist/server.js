@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var body_parser_1 = __importDefault(require("body-parser"));
+// import cors from 'cors';
 var express_1 = __importDefault(require("express"));
 var query_1 = require("./model/query");
 var setup_1 = require("./model/setup");
@@ -49,6 +50,12 @@ var port = process.env.PORT || 5000;
  * Setup body parser
  */
 app.use(body_parser_1.default.json());
+app.use(cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+}));
 /**
  * Dummy Json
  */
