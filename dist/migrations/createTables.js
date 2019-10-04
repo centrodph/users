@@ -1,4 +1,5 @@
-module.exports.createUsers = "\nDROP TABLE users;\nCREATE SEQUENCE IF NOT EXISTS users_id_seq;\nCREATE TABLE IF NOT EXISTS users (\n  id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),\n  email text UNIQUE,\n  password text\n);\n";
-module.exports.createIndexUsers = "\nCREATE INDEX IF NOT EXISTS users_email_idx on users (email);\n";
-module.exports.addBasicUsers = "\n  INSERT INTO users VALUES (1,'admin@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n  INSERT INTO users VALUES (2,'supervisor@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n  INSERT INTO users VALUES (3,'operator@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n";
+module.exports.clearTables = "\n  DROP TABLE IF EXISTS users;\n  DROP SEQUENCE IF EXISTS users_id_seq;\n  DROP INDEX IF EXISTS users_email_idx;\n\n";
+module.exports.createUsers = "\n  CREATE SEQUENCE IF NOT EXISTS users_id_seq;\n  CREATE TABLE IF NOT EXISTS users (\n    id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),\n    email text UNIQUE,\n    password text\n  );\n  CREATE INDEX IF NOT EXISTS users_email_idx on users (email);\n";
+module.exports.createIndexUsers = "\n    SELECT (1+1);\n";
+module.exports.addBasicUsers = "\n  INSERT INTO users (email, password) VALUES ('admin@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n  INSERT INTO users (email, password) VALUES ('supervisor@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n  INSERT INTO users (email, password) VALUES ('operator@demo.com', '1234')\n  ON CONFLICT (email)\n  DO NOTHING;\n";
 //# sourceMappingURL=createTables.js.map

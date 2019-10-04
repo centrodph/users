@@ -4,6 +4,7 @@ const {
   createUsers,
   createIndexUsers,
   addBasicUsers,
+  clearTables,
 } = require("../migrations/createTables");
 
 const db = new Pool({
@@ -14,7 +15,7 @@ const db = new Pool({
 const setupDB = async () => {
   try {
     const client = await db.connect();
-
+    await client.query(clearTables);
     await client.query(createUsers);
     await client.query(createIndexUsers);
     await client.query(addBasicUsers);

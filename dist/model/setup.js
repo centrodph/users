@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var pg_1 = require("pg");
-var _a = require("../migrations/createTables"), createUsers = _a.createUsers, createIndexUsers = _a.createIndexUsers, addBasicUsers = _a.addBasicUsers;
+var _a = require("../migrations/createTables"), createUsers = _a.createUsers, createIndexUsers = _a.createIndexUsers, addBasicUsers = _a.addBasicUsers, clearTables = _a.clearTables;
 var db = new pg_1.Pool({
     max: 10,
     connectionString: process.env.DATABASE_URL,
@@ -48,25 +48,28 @@ var setupDB = function () { return __awaiter(void 0, void 0, void 0, function ()
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
+                _a.trys.push([0, 6, , 7]);
                 return [4 /*yield*/, db.connect()];
             case 1:
                 client = _a.sent();
-                return [4 /*yield*/, client.query(createUsers)];
+                return [4 /*yield*/, client.query(clearTables)];
             case 2:
                 _a.sent();
-                return [4 /*yield*/, client.query(createIndexUsers)];
+                return [4 /*yield*/, client.query(createUsers)];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, client.query(addBasicUsers)];
+                return [4 /*yield*/, client.query(createIndexUsers)];
             case 4:
                 _a.sent();
-                return [3 /*break*/, 6];
+                return [4 /*yield*/, client.query(addBasicUsers)];
             case 5:
+                _a.sent();
+                return [3 /*break*/, 7];
+            case 6:
                 error_1 = _a.sent();
                 console.log(error_1);
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };

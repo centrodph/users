@@ -1,4 +1,3 @@
-import sql from 'sql-template-strings';
-export const listUsers = () => sql`
+export const listUsers = () => `
  SELECT * FROM users;
 `;
