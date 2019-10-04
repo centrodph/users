@@ -2,14 +2,24 @@ module.exports.clearTables = `
   DROP TABLE IF EXISTS users;
   DROP SEQUENCE IF EXISTS users_id_seq;
   DROP INDEX IF EXISTS users_email_idx;
-
+  DROP TYPE  IF EXISTS accesstype;
+  DROP TYPE  IF EXISTS userstatus;
+  DROP TYPE  IF EXISTS datastatus;
 `;
+
+module.exports.createTypes = `
+  CREATE TYPE accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
+  CREATE TYPE userstatus AS ENUM ('ACTIVE', 'INACTIVE');
+  CREATE TYPE datastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
+`;
+
 module.exports.createUsers = `
   CREATE SEQUENCE IF NOT EXISTS users_id_seq;
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),
     email text UNIQUE,
-    password text
+    password text,
+    access accesstype
   );
   CREATE INDEX IF NOT EXISTS users_email_idx on users (email);
 `;
@@ -18,13 +28,13 @@ module.exports.createIndexUsers = `
 `;
 
 module.exports.addBasicUsers = `
-  INSERT INTO users (email, password) VALUES ('admin@demo.com', '1234')
+  INSERT INTO users (email, password, access) VALUES ('admin@demo.com', '1234', 'ADMIN')
   ON CONFLICT (email)
   DO NOTHING;
-  INSERT INTO users (email, password) VALUES ('supervisor@demo.com', '1234')
+  INSERT INTO users (email, password, access) VALUES ('supervisor@demo.com', '1234', 'SUPERVISOR')
   ON CONFLICT (email)
   DO NOTHING;
-  INSERT INTO users (email, password) VALUES ('operator@demo.com', '1234')
+  INSERT INTO users (email, password, access) VALUES ('operator@demo.com', '1234', 'OPERATOR')
   ON CONFLICT (email)
   DO NOTHING;
 `;
