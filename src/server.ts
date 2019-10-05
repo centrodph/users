@@ -1,8 +1,10 @@
 import bodyParser from 'body-parser';
-// import cors from 'cors';
+import cors from 'cors';
 import express from 'express';
 import { listUsers } from './model/query';
 import { db } from './model/setup';
+// services
+import { userLogin } from './services/userLogin';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -34,11 +36,16 @@ app.get('/', (request, response) => {
 });
 
 /**
- * Users
+ * Users list
  */
 app.get('/users', async (request, response) => {
   const { rows } = await db.query(listUsers());
   response.send(rows);
 });
+
+/**
+ * Login user
+ */
+app.post('/user', userLogin);
 
 app.listen(port);

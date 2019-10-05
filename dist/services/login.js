@@ -35,62 +35,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var body_parser_1 = __importDefault(require("body-parser"));
-var cors_1 = __importDefault(require("cors"));
-var express_1 = __importDefault(require("express"));
-var query_1 = require("./model/query");
 var setup_1 = require("./model/setup");
-// services
-var userLogin_1 = require("./services/userLogin");
-var app = express_1.default();
-var port = process.env.PORT || 5000;
-/**
- * Setup body parser
- */
-app.use(body_parser_1.default.json());
-app.use(cors_1.default({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-}));
-/**
- * Dummy Json
- */
-app.get('/json', function (request, response) {
-    response.send({
-        author: 'Gerardo Perrucci',
-        email: 'centrodph@gmail.com',
-    });
-});
-/**
- * Dummy route
- */
-app.get('/', function (request, response) {
-    response.send('Express APP working');
-});
-/**
- * Users list
- */
-app.get('/users', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+exports.loginUser = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var rows;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, setup_1.db.query(query_1.listUsers())];
+            case 0: return [4 /*yield*/, setup_1.db.query(listUsers())];
             case 1:
                 rows = (_a.sent()).rows;
                 response.send(rows);
                 return [2 /*return*/];
         }
     });
-}); });
-/**
- * Login user
- */
-app.post('/user', userLogin_1.userLogin);
-app.listen(port);
-//# sourceMappingURL=server.js.map
+}); };
+//# sourceMappingURL=login.js.map
