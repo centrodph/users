@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var setup_1 = require("../model/setup");
 var query_1 = require("../model/query");
+var setup_1 = require("../model/setup");
 exports.getUsers = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var rows;
     return __generator(this, function (_a) {

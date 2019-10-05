@@ -39,20 +39,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var passport_1 = __importDefault(require("passport"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var setup_1 = require("../model/setup");
-var query_1 = require("../model/query");
+var passport_1 = __importDefault(require("passport"));
 var config_1 = require("../config");
+var query_1 = require("../model/query");
+var setup_1 = require("../model/setup");
 exports.userLoginPassport = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        passport_1.default.authenticate("local", { session: false }, function (err, user, info) {
+        passport_1.default.authenticate('local', { session: false }, function (err, user, info) {
             if (err || !user) {
-                return response.status(403);
+                return response.status(403).send(err);
             }
             request.login(user, { session: false }, function (loginError) {
                 if (loginError) {
-                    response.send(err);
+                    return response.send(err);
                 }
                 var token = jsonwebtoken_1.default.sign(user, config_1.PRIVATE_KEY);
                 return response.json({ user: user, token: token });
@@ -68,19 +68,17 @@ exports.userLogin = function (request, response) { return __awaiter(void 0, void
             case 0:
                 _b.trys.push([0, 2, , 3]);
                 _a = request.body, email = _a.email, password = _a.password;
-                return [4 /*yield*/, setup_1.db.query(query_1.loginUser({ email: email }))];
+                return [4 /*yield*/, setup_1.db.query(query_1.loginUser({ email: email, password: password }))];
             case 1:
                 rows = (_b.sent()).rows;
                 user = rows[0];
                 if (!user) {
-                    return [2 /*return*/, response.status(403).json({})];
+                    return [2 /*return*/, response.status(403).send()];
                 }
-                response.status(200).send(user);
-                return [3 /*break*/, 3];
+                return [2 /*return*/, response.status(200).send(user)];
             case 2:
                 error_1 = _b.sent();
-                response.status(500).send();
-                return [3 /*break*/, 3];
+                return [2 /*return*/, response.status(500).send()];
             case 3: return [2 /*return*/];
         }
     });

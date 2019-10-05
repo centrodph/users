@@ -79,14 +79,14 @@ passport_1.default.use(new passport_jwt_1.default.Strategy({
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, setup_1.db.query(query_1.userFindById(jwtPayload.id))];
+                return [4 /*yield*/, setup_1.db.query(query_1.userFindById({ id: jwtPayload.id }))];
             case 1:
                 rows = (_a.sent()).rows;
                 user = rows[0];
                 if (!user) {
                     return [2 /*return*/, cb(null, false, { message: "Incorrect email or password." })];
                 }
-                return [2 /*return*/, cb(null, user, { message: "Logged In Successfully" })];
+                return [2 /*return*/, cb(null, user)];
             case 2:
                 error_2 = _a.sent();
                 return [2 /*return*/, cb(null, false, { message: "Invalid request" })];

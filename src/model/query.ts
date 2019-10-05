@@ -11,7 +11,7 @@ export const loginUser = ({
   email: string;
   password?: string;
 }) => sql`
-    SELECT * FROM users WHERE email=${email} LIMIT 1;
+    SELECT * FROM users WHERE email=${email} AND password=${password} LIMIT 1;
 `;
 
 export const userFindById = ({

@@ -7,10 +7,10 @@ var body_parser_1 = __importDefault(require("body-parser"));
 var cors_1 = __importDefault(require("cors"));
 var express_1 = __importDefault(require("express"));
 var passport_1 = __importDefault(require("passport"));
-var query_1 = require("./model/query");
 // services
 require("./services/passport");
 var userLogin_1 = require("./services/userLogin");
+var usersApi_1 = require("./services/usersApi");
 var app = express_1.default();
 var port = process.env.PORT || 5000;
 /**
@@ -41,7 +41,7 @@ app.get('/', function (request, response) {
 /**
  * Users list
  */
-app.get('/users', passport_1.default.authenticate('jwt', { session: false }), query_1.listUsers);
+app.get('/users', passport_1.default.authenticate('jwt', { session: false }), usersApi_1.getUsers);
 /**
  * Login user
  */

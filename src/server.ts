@@ -7,6 +7,7 @@ import { db } from './model/setup';
 // services
 import './services/passport';
 import { userLogin, userLoginPassport } from './services/userLogin';
+import { getUsers } from './services/usersApi';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -40,12 +41,12 @@ app.get('/', (request, response) => {
 /**
  * Users list
  */
-app.get('/users', passport.authenticate('jwt', { session: false }), listUsers);
+app.get('/users', passport.authenticate('jwt', { session: false }), getUsers);
 
 /**
  * Login user
  */
 app.post('/auth', userLoginPassport);
- app.post('/user', userLogin);
+app.post('/user', userLogin);
 
 app.listen(port);

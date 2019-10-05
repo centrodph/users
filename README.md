@@ -14,15 +14,40 @@ Url: [https://backusers.herokuapp.com/](https://backusers.herokuapp.com/)
 
 - [X] Create a endpoint users to retrieve the users table
 
-- [ ] Deploy to heroku/aws
+- [X] Deploy to heroku/aws
 
 ## application steps
 
+- [X] Setup passport with local strategy
+
+- [X] Setup JWT authentication
+
+- [] Create operations table
+
+- [] Create an ACL with the basic rules
+
+- [] Add operation endpoint
+
+- [] Edit operation endpoint
+
+- [] Remove operation endpoint
+
+- [] Add operation endpoint
+
+- [] Edit operator endpoint
+
+- [] Remove operation endpoint
 
 
+## TODO
 
-## application steps
+- [] Use bcrypt to encrypt the password
 
+- [] Use different config files prod/development
+
+- [] Fix the issue with the missing dependencies in the npm install inside the docker container
+
+- [] Fix the issue with the missing dependencies in the npm install inside the docker container
 
 
 ## run the app
