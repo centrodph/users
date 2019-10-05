@@ -41,8 +41,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var passport_1 = __importDefault(require("passport"));
 var passport_local_1 = require("passport-local");
+var passport_jwt_1 = __importDefault(require("passport-jwt"));
 var setup_1 = require("../model/setup");
 var query_1 = require("../model/query");
+var config_1 = require("../config");
 passport_1.default.use(new passport_local_1.Strategy({
     usernameField: "email",
     passwordField: "password"
@@ -62,6 +64,31 @@ passport_1.default.use(new passport_local_1.Strategy({
                 return [2 /*return*/, cb(null, user, { message: "Logged In Successfully" })];
             case 2:
                 error_1 = _a.sent();
+                return [2 /*return*/, cb(null, false, { message: "Invalid request" })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); }));
+var extractJWT = passport_jwt_1.default.ExtractJwt;
+passport_1.default.use(new passport_jwt_1.default.Strategy({
+    jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: config_1.PRIVATE_KEY,
+}, function (jwtPayload, cb) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows, user, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, setup_1.db.query(query_1.userFindById(jwtPayload.id))];
+            case 1:
+                rows = (_a.sent()).rows;
+                user = rows[0];
+                if (!user) {
+                    return [2 /*return*/, cb(null, false, { message: "Incorrect email or password." })];
+                }
+                return [2 /*return*/, cb(null, user, { message: "Logged In Successfully" })];
+            case 2:
+                error_2 = _a.sent();
                 return [2 /*return*/, cb(null, false, { message: "Invalid request" })];
             case 3: return [2 /*return*/];
         }

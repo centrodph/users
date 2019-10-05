@@ -13,3 +13,11 @@ export const loginUser = ({
 }) => sql`
     SELECT * FROM users WHERE email=${email} LIMIT 1;
 `;
+
+export const userFindById = ({
+  id,
+}: {
+  id: string | number;
+}) => sql`
+    SELECT * FROM users WHERE id=${id} LIMIT 1;
+`;

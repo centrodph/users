@@ -1,7 +1,9 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
+import passportJWT from "passport-jwt";
 import { db } from "../model/setup";
-import { loginUser } from "../model/query";
+import { loginUser, userFindById } from "../model/query";
+import { PRIVATE_KEY } from '../config'
 
 passport.use(
   new Strategy(
@@ -12,6 +14,28 @@ passport.use(
     async (email, password, cb) => {
       try {
         const { rows } = await db.query(loginUser({ email, password }));
+        const user = rows[0];
+        if (!user) {
+          return cb(null, false, { message: "Incorrect email or password." });
+        }
+        return cb(null, user, { message: "Logged In Successfully" });
+      } catch (error) {
+        return cb(null, false, { message: "Invalid request" });
+      }
+    }
+  )
+);
+
+const extractJWT = passportJWT.ExtractJwt;
+passport.use(
+  new passportJWT.Strategy(
+    {
+      jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: PRIVATE_KEY,
+    },
+    async (jwtPayload, cb) => {
+      try {
+        const { rows } = await db.query(userFindById(jwtPayload.id));
         const user = rows[0];
         if (!user) {
           return cb(null, false, { message: "Incorrect email or password." });

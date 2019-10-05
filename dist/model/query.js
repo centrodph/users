@@ -13,5 +13,9 @@ exports.loginUser = function (_a) {
     var email = _a.email, password = _a.password;
     return sql_template_strings_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    SELECT * FROM users WHERE email=", " LIMIT 1;\n"], ["\n    SELECT * FROM users WHERE email=", " LIMIT 1;\n"])), email);
 };
-var templateObject_1;
+exports.userFindById = function (_a) {
+    var id = _a.id;
+    return sql_template_strings_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    SELECT * FROM users WHERE id=", " LIMIT 1;\n"], ["\n    SELECT * FROM users WHERE id=", " LIMIT 1;\n"])), id);
+};
+var templateObject_1, templateObject_2;
 //# sourceMappingURL=query.js.map

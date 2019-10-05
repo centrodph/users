@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import passport from 'passport';
 import { listUsers } from './model/query';
 import { db } from './model/setup';
 // services
@@ -39,10 +40,7 @@ app.get('/', (request, response) => {
 /**
  * Users list
  */
-app.get('/users', async (request, response) => {
-  const { rows } = await db.query(listUsers());
-  response.send(rows);
-});
+app.get('/users', passport.authenticate('jwt', { session: false }), listUsers);
 
 /**
  * Login user

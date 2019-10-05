@@ -35,54 +35,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var passport_1 = __importDefault(require("passport"));
-var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var setup_1 = require("../model/setup");
 var query_1 = require("../model/query");
-var config_1 = require("../config");
-exports.userLoginPassport = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+exports.getUsers = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows;
     return __generator(this, function (_a) {
-        passport_1.default.authenticate("local", { session: false }, function (err, user, info) {
-            if (err || !user) {
-                return response.status(403);
-            }
-            request.login(user, { session: false }, function (loginError) {
-                if (loginError) {
-                    response.send(err);
-                }
-                var token = jsonwebtoken_1.default.sign(user, config_1.PRIVATE_KEY);
-                return response.json({ user: user, token: token });
-            });
-        })(request, response);
-        return [2 /*return*/];
-    });
-}); };
-exports.userLogin = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, rows, user, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = request.body, email = _a.email, password = _a.password;
-                return [4 /*yield*/, setup_1.db.query(query_1.loginUser({ email: email }))];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, setup_1.db.query(query_1.listUsers())];
             case 1:
-                rows = (_b.sent()).rows;
-                user = rows[0];
-                if (!user) {
-                    return [2 /*return*/, response.status(403).json({})];
-                }
-                response.status(200).send(user);
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _b.sent();
-                response.status(500).send();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                rows = (_a.sent()).rows;
+                response.send(rows);
+                return [2 /*return*/];
         }
     });
 }); };
-//# sourceMappingURL=userLogin.js.map
+//# sourceMappingURL=usersApi.js.map
