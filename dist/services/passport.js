@@ -43,7 +43,7 @@ var passport_1 = __importDefault(require("passport"));
 var passport_local_1 = require("passport-local");
 var setup_1 = require("../model/setup");
 var query_1 = require("../model/query");
-passport_1.default.use(new passport_local_1.LocalStrategy({
+passport_1.default.use(new passport_local_1.Strategy({
     usernameField: "email",
     passwordField: "password"
 }, function (email, password, cb) { return __awaiter(void 0, void 0, void 0, function () {

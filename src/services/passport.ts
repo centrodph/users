@@ -1,10 +1,10 @@
 import passport from "passport";
-import { LocalStrategy } from "passport-local";
+import { Strategy } from "passport-local";
 import { db } from "../model/setup";
 import { loginUser } from "../model/query";
 
 passport.use(
-  new LocalStrategy(
+  new Strategy(
     {
       usernameField: "email",
       passwordField: "password"
