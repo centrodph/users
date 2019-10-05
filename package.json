@@ -30,6 +30,8 @@
   },
   "homepage": "https://github.com/centrodph/users#readme",
   "dependencies": {
+    "@types/passport": "^1.0.1",
+    "@types/passport-local": "^1.0.33",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

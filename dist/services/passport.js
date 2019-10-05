@@ -39,60 +39,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var body_parser_1 = __importDefault(require("body-parser"));
-var cors_1 = __importDefault(require("cors"));
-var express_1 = __importDefault(require("express"));
-var query_1 = require("./model/query");
-var setup_1 = require("./model/setup");
-// services
-require("./services/passport");
-var userLogin_1 = require("./services/userLogin");
-var app = express_1.default();
-var port = process.env.PORT || 5000;
-/**
- * Setup body parser
- */
-app.use(body_parser_1.default.json());
-app.use(cors_1.default({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-}));
-/**
- * Dummy Json
- */
-app.get('/json', function (request, response) {
-    response.send({
-        author: 'Gerardo Perrucci',
-        email: 'centrodph@gmail.com',
-    });
-});
-/**
- * Dummy route
- */
-app.get('/', function (request, response) {
-    response.send('Express APP working');
-});
-/**
- * Users list
- */
-app.get('/users', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var rows;
+var passport_1 = __importDefault(require("passport"));
+var passport_local_1 = require("passport-local");
+var setup_1 = require("../model/setup");
+var query_1 = require("../model/query");
+passport_1.default.use(new passport_local_1.LocalStrategy({
+    usernameField: "email",
+    passwordField: "password"
+}, function (email, password, cb) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows, user, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, setup_1.db.query(query_1.listUsers())];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, setup_1.db.query(query_1.loginUser({ email: email, password: password }))];
             case 1:
                 rows = (_a.sent()).rows;
-                response.send(rows);
-                return [2 /*return*/];
+                user = rows[0];
+                if (!user) {
+                    return [2 /*return*/, cb(null, false, { message: "Incorrect email or password." })];
+                }
+                return [2 /*return*/, cb(null, user, { message: "Logged In Successfully" })];
+            case 2:
+                error_1 = _a.sent();
+                return [2 /*return*/, cb(null, false, { message: "Invalid request" })];
+            case 3: return [2 /*return*/];
         }
     });
-}); });
-/**
- * Login user
- */
-app.post('/auth', userLogin_1.userLoginPassport);
-app.post('/user', userLogin_1.userLogin);
-app.listen(port);
-//# sourceMappingURL=server.js.map
+}); }));
+//# sourceMappingURL=passport.js.map

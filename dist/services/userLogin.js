@@ -35,9 +35,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var passport_1 = __importDefault(require("passport"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var setup_1 = require("../model/setup");
 var query_1 = require("../model/query");
+exports.userLoginPassport = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        passport_1.default.authenticate("local", { session: false }, function (err, user, info) {
+            if (err || !user) {
+                return response.status(400).json({
+                    message: "Something is not right",
+                    user: user
+                });
+            }
+            request.login(user, { session: false }, function (err) {
+                if (err) {
+                    response.send(err);
+                }
+                // generate a signed son web token with the contents of user object and return it in the response
+                var token = jsonwebtoken_1.default.sign(user, "your_jwt_secret");
+                return response.json({ user: user, token: token });
+            });
+        })(request, response);
+        return [2 /*return*/];
+    });
+}); };
 exports.userLogin = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, rows, user, error_1;
     return __generator(this, function (_b) {

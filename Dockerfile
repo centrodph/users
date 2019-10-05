@@ -8,7 +8,7 @@ CMD rm ./package-lock.json
 COPY ./package.json .
 COPY ./package-lock.json .
 
-RUN npm install --no-cache
+RUN npm ci
 
 COPY . .
 

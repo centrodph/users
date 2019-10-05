@@ -4,7 +4,8 @@ import express from 'express';
 import { listUsers } from './model/query';
 import { db } from './model/setup';
 // services
-import { userLogin } from './services/userLogin';
+import './services/passport';
+import { userLogin, userLoginPassport } from './services/userLogin';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -46,6 +47,7 @@ app.get('/users', async (request, response) => {
 /**
  * Login user
  */
-app.post('/user', userLogin);
+app.post('/auth', userLoginPassport);
+ app.post('/user', userLogin);
 
 app.listen(port);
