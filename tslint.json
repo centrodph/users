@@ -21,7 +21,8 @@
         "no-console": false,
         "object-literal-sort-keys": false,
         "no-var-requires": false,
-        "quotemark": false
+        "quotemark": false,
+        "ordered-imports": false
     },
     "rulesDirectory": []
 }

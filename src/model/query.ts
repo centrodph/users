@@ -4,6 +4,10 @@ export const listUsers = () => `
  SELECT * FROM users;
 `;
 
+export const listOperations = () => `
+ SELECT * FROM operations;
+`;
+
 export const loginUser = ({
   email,
   password,

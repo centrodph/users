@@ -19,10 +19,28 @@ module.exports.createUsers = `
     id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),
     email text UNIQUE,
     password text,
-    access accesstype
+    access accesstype,
+    status userstatus
   );
   CREATE INDEX IF NOT EXISTS users_email_idx on users (email);
 `;
+
+/**
+ *  operations
+ */
+module.exports.createOperations = `
+  CREATE SEQUENCE IF NOT EXISTS operations_id_seq;
+  CREATE TABLE IF NOT EXISTS operations (
+    id INTEGER PRIMARY KEY DEFAULT nextval('operations_id_seq'),
+    status datastatus,
+    properties json
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    created_by integer NOT NULL,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE
+  );
+  CREATE INDEX IF NOT EXISTS users_email_idx on operations (created_by);
+`;
+
 module.exports.createIndexUsers = `
     SELECT (1+1);
 `;
