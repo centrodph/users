@@ -18,5 +18,9 @@ exports.userFindById = function (_a) {
     var id = _a.id;
     return sql_template_strings_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    SELECT * FROM users WHERE id=", " LIMIT 1;\n"], ["\n    SELECT * FROM users WHERE id=", " LIMIT 1;\n"])), id);
 };
-var templateObject_1, templateObject_2;
+exports.insertUser = function (_a) {
+    var email = _a.email, password = _a.password, access = _a.access, status = _a.status;
+    return sql_template_strings_1.default(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  INSERT INTO users (email, password, access, status)\n  VALUES\n  (", ", ", ", ", ", ", ");\n"], ["\n  INSERT INTO users (email, password, access, status)\n  VALUES\n  (", ", ", ", ", ", ", ");\n"])), email, password, access, status);
+};
+var templateObject_1, templateObject_2, templateObject_3;
 //# sourceMappingURL=query.js.map

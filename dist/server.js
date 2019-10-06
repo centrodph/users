@@ -32,6 +32,8 @@ app.get("/", dummyApi_1.getTest);
 app.post("/auth", userLogin_1.userLoginPassport);
 app.post("/user", userLogin_1.userLogin);
 app.get("/users", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR]), usersApi_1.getUsers);
+app.post("/users", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN]), usersApi_1.createUser);
+app.get("/users/:id", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR]), usersApi_1.editUser);
 /**
  * Operations
  */

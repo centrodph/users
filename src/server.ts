@@ -8,7 +8,7 @@ import { ACCESS_TYPE } from "./model/accessType";
 import "./services/passport";
 import { getAuthor, getTest } from "./services/dummyApi";
 import { userLogin, userLoginPassport } from "./services/userLogin";
-import { getUsers } from "./services/usersApi";
+import { getUsers, createUser, editUser } from "./services/usersApi";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -34,6 +34,18 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
   getUsers,
+);
+app.post(
+  "/users",
+  passport.authenticate("jwt", { session: false }),
+  aclBasic([ACCESS_TYPE.ADMIN]),
+  createUser,
+);
+app.get(
+  "/users/:id",
+  passport.authenticate("jwt", { session: false }),
+  aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
+  editUser,
 );
 
 /**

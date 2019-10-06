@@ -50,4 +50,28 @@ exports.getUsers = function (request, response) { return __awaiter(void 0, void 
         }
     });
 }); };
+exports.createUser = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, setup_1.db.query(query_1.insertUser(request.user))];
+            case 1:
+                rows = (_a.sent()).rows;
+                response.send(rows);
+                return [2 /*return*/];
+        }
+    });
+}); };
+exports.editUser = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, setup_1.db.query(query_1.listUsers())];
+            case 1:
+                rows = (_a.sent()).rows;
+                response.send(rows);
+                return [2 /*return*/];
+        }
+    });
+}); };
 //# sourceMappingURL=usersApi.js.map
