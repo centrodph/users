@@ -1,7 +1,10 @@
 module.exports.clearTables = `
-  DROP TABLE IF EXISTS users;
+  DROP TABLE IF EXISTS users CASCADE;
   DROP SEQUENCE IF EXISTS users_id_seq;
   DROP INDEX IF EXISTS users_email_idx;
+  DROP TABLE IF EXISTS operations CASCADE;
+  DROP SEQUENCE IF EXISTS operations_id_seq;
+  DROP INDEX IF EXISTS operations_idx;
   DROP TYPE  IF EXISTS accesstype;
   DROP TYPE  IF EXISTS userstatus;
   DROP TYPE  IF EXISTS datastatus;
@@ -33,12 +36,12 @@ module.exports.createOperations = `
   CREATE TABLE IF NOT EXISTS operations (
     id INTEGER PRIMARY KEY DEFAULT nextval('operations_id_seq'),
     status datastatus,
-    properties json
+    properties json DEFAULT '{}',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     created_by integer NOT NULL,
     FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE
   );
-  CREATE INDEX IF NOT EXISTS users_email_idx on operations (created_by);
+  CREATE INDEX IF NOT EXISTS operations_idx on operations (created_by);
 `;
 
 module.exports.createIndexUsers = `

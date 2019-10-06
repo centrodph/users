@@ -36,48 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var pg_1 = require("pg");
-var _a = require("../migrations/createTables"), createUsers = _a.createUsers, createIndexUsers = _a.createIndexUsers, addBasicUsers = _a.addBasicUsers, clearTables = _a.clearTables, createTypes = _a.createTypes, createOperations = _a.createOperations;
-var db = new pg_1.Pool({
-    max: 10,
-    connectionString: process.env.DATABASE_URL,
-});
-exports.db = db;
-var setupDB = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var client, error_1;
+exports.getAuthor = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 8, , 9]);
-                return [4 /*yield*/, db.connect()];
-            case 1:
-                client = _a.sent();
-                return [4 /*yield*/, client.query(clearTables)];
-            case 2:
-                _a.sent();
-                return [4 /*yield*/, client.query(createTypes)];
-            case 3:
-                _a.sent();
-                return [4 /*yield*/, client.query(createUsers)];
-            case 4:
-                _a.sent();
-                return [4 /*yield*/, client.query(createOperations)];
-            case 5:
-                _a.sent();
-                return [4 /*yield*/, client.query(createIndexUsers)];
-            case 6:
-                _a.sent();
-                return [4 /*yield*/, client.query(addBasicUsers)];
-            case 7:
-                _a.sent();
-                return [3 /*break*/, 9];
-            case 8:
-                error_1 = _a.sent();
-                console.log(error_1);
-                return [3 /*break*/, 9];
-            case 9: return [2 /*return*/];
-        }
+        response.send({
+            author: "Gerardo Perrucci",
+            email: "centrodph@gmail.com"
+        });
+        return [2 /*return*/];
     });
 }); };
-setupDB();
-//# sourceMappingURL=setup.js.map
+exports.getTest = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        response.send("Express APP working");
+        return [2 /*return*/];
+    });
+}); };
+//# sourceMappingURL=dummyApi.js.map

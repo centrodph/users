@@ -78,19 +78,22 @@ passport_1.default.use(new passport_jwt_1.default.Strategy({
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, setup_1.db.query(query_1.userFindById({ id: jwtPayload.id }))];
+                console.log("Jwt auth");
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, setup_1.db.query(query_1.userFindById({ id: jwtPayload.id }))];
+            case 2:
                 rows = (_a.sent()).rows;
                 user = rows[0];
                 if (!user) {
-                    return [2 /*return*/, cb(null, false, { message: "Incorrect email or password." })];
+                    return [2 /*return*/, cb(null, false, { message: "Wrong token" })];
                 }
                 return [2 /*return*/, cb(null, user)];
-            case 2:
+            case 3:
                 error_2 = _a.sent();
                 return [2 /*return*/, cb(null, false, { message: "Invalid request" })];
-            case 3: return [2 /*return*/];
+            case 4: return [2 /*return*/];
         }
     });
 }); }));

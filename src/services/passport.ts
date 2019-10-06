@@ -34,11 +34,12 @@ passport.use(
       secretOrKey: PRIVATE_KEY,
     },
     async (jwtPayload, cb) => {
+      console.log("Jwt auth");
       try {
         const { rows } = await db.query(userFindById({ id: jwtPayload.id }));
         const user = rows[0];
         if (!user) {
-          return cb(null, false, { message: "Incorrect email or password." });
+          return cb(null, false, { message: "Wrong token" });
         }
         return cb(null, user);
       } catch (error) {
