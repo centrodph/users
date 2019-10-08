@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var body_parser_1 = __importDefault(require("body-parser"));
 var express_1 = __importDefault(require("express"));
 var passport_1 = __importDefault(require("passport"));
+// db
+require("./model/setup");
 // services
 var cors_1 = require("./config/cors");
 var acl_1 = require("./config/acl");

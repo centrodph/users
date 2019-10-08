@@ -2,12 +2,14 @@ module.exports.clearTables = `
   DROP TABLE IF EXISTS users CASCADE;
   DROP SEQUENCE IF EXISTS users_id_seq;
   DROP INDEX IF EXISTS users_email_idx;
-  DROP TABLE IF EXISTS operations CASCADE;
-  DROP SEQUENCE IF EXISTS operations_id_seq;
-  DROP INDEX IF EXISTS operations_idx;
-  DROP TYPE  IF EXISTS accesstype;
-  DROP TYPE  IF EXISTS userstatus;
-  DROP TYPE  IF EXISTS datastatus;
+
+  DROP TABLE  IF EXISTS operations CASCADE;
+  DROP SEQUENCE  IF EXISTS operations_id_seq;
+  DROP INDEX  IF EXISTS operations_idx;
+
+  DROP TYPE IF EXISTS  accesstype;
+  DROP TYPE IF EXISTS  userstatus;
+  DROP TYPE IF EXISTS datastatus;
 `;
 
 module.exports.createTypes = `
@@ -49,13 +51,16 @@ module.exports.createIndexUsers = `
 `;
 
 module.exports.addBasicUsers = `
-  INSERT INTO users (email, password, access) VALUES ('admin@demo.com', '1234', 'ADMIN')
+  INSERT INTO users (email, password, access, status) VALUES ('admin@demo.com', '1234', 'ADMIN', 'ACTIVE')
   ON CONFLICT (email)
   DO NOTHING;
-  INSERT INTO users (email, password, access) VALUES ('supervisor@demo.com', '1234', 'SUPERVISOR')
+  INSERT INTO users (email, password, access, status) VALUES ('supervisor@demo.com', '1234', 'SUPERVISOR', 'ACTIVE')
   ON CONFLICT (email)
   DO NOTHING;
-  INSERT INTO users (email, password, access) VALUES ('operator@demo.com', '1234', 'OPERATOR')
+  INSERT INTO users (email, password, access, status) VALUES ('operator@demo.com', '1234', 'OPERATOR', 'ACTIVE')
+  ON CONFLICT (email)
+  DO NOTHING;
+  INSERT INTO users (email, password, access, status) VALUES ('operator2@demo.com', '1234', 'OPERATOR', 'INACTIVE')
   ON CONFLICT (email)
   DO NOTHING;
 `;

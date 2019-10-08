@@ -1,6 +1,8 @@
 import bodyParser from "body-parser";
 import express from "express";
 import passport from "passport";
+// db
+import "./model/setup";
 // services
 import { corsConfig } from "./config/cors";
 import { aclBasic } from "./config/acl";
@@ -33,19 +35,19 @@ app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  getUsers,
+  getUsers
 );
 app.post(
   "/users",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN]),
-  createUser,
+  createUser
 );
 app.get(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  editUser,
+  editUser
 );
 
 /**
