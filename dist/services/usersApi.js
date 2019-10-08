@@ -51,14 +51,22 @@ exports.getUsers = function (request, response) { return __awaiter(void 0, void 
     });
 }); };
 exports.createUser = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var rows;
+    var result, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, setup_1.db.query(query_1.insertUser(request.user))];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, setup_1.db.query(query_1.insertUser(request.body))];
             case 1:
-                rows = (_a.sent()).rows;
-                response.send(rows);
-                return [2 /*return*/];
+                result = _a.sent();
+                console.log(result);
+                response.send(result);
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                response.status(500).send({ message: error_1.detail, error: error_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

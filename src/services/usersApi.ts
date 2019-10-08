@@ -7,8 +7,13 @@ export const getUsers = async (request, response) => {
 };
 
 export const createUser = async (request, response) => {
-  const { rows } = await db.query(insertUser(request.user));
-  response.send(rows);
+  try {
+    const result = await db.query(insertUser(request.body));
+    console.log(result);
+    response.send(result);
+  } catch (error) {
+    response.status(500).send({ message: error.detail, error });
+  }
 };
 
 export const editUser = async (request, response) => {
