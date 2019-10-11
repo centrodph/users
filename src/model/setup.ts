@@ -17,7 +17,7 @@ const db = new Pool({
 const setupDB = async () => {
   try {
     const client = await db.connect();
-    await client.query(clearTables);
+    // await client.query(clearTables);
     await client.query(createTypes);
     await client.query(createUsers);
     await client.query(createOperations);

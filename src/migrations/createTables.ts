@@ -13,9 +13,9 @@ module.exports.clearTables = `
 `;
 
 module.exports.createTypes = `
-  CREATE TYPE accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
-  CREATE TYPE userstatus AS ENUM ('ACTIVE', 'INACTIVE');
-  CREATE TYPE datastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
+  CREATE TYPE  IF NOT EXISTS accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
+  CREATE TYPE  IF NOT EXISTS userstatus AS ENUM ('ACTIVE', 'INACTIVE');
+  CREATE TYPE  IF NOT EXISTS atastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
 `;
 
 module.exports.createUsers = `
