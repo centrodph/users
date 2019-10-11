@@ -36,19 +36,19 @@ app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  getUsers
+  getUsers,
 );
 app.post(
   "/users",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN]),
-  createUser
+  createUser,
 );
 app.get(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  editUser
+  editUser,
 );
 
 /**
@@ -58,12 +58,12 @@ app.get(
   "/operations",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR, ACCESS_TYPE.OPERATOR]),
-  getOperations
+  getOperations,
 );
 app.post(
   "/operations",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR, ACCESS_TYPE.OPERATOR]),
-  createOperation
+  createOperation,
 );
 app.listen(port);
