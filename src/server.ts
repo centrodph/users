@@ -11,6 +11,7 @@ import "./services/passport";
 import { getAuthor, getTest } from "./services/dummyApi";
 import { userLogin, userLoginPassport } from "./services/userLogin";
 import { getUsers, createUser, editUser } from "./services/usersApi";
+import { getOperations, createOperation } from "./services/operationsApi";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -53,5 +54,16 @@ app.get(
 /**
  * Operations
  */
-
+app.get(
+  "/operations",
+  passport.authenticate("jwt", { session: false }),
+  aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR, ACCESS_TYPE.OPERATOR]),
+  getOperations
+);
+app.post(
+  "/operations",
+  passport.authenticate("jwt", { session: false }),
+  aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR, ACCESS_TYPE.OPERATOR]),
+  createOperation
+);
 app.listen(port);
