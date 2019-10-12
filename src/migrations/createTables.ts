@@ -40,7 +40,7 @@ module.exports.createOperations = `
     properties json DEFAULT '{}',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     created_by integer NOT NULL,
-    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (created_by) REFERENCES "users" (id) ON DELETE CASCADE
   );
   CREATE INDEX IF NOT EXISTS operations_idx on operations (created_by);
 `;

@@ -27,7 +27,7 @@ exports.insertUser = function (_a) {
 exports.listOperations = function () { return "\n SELECT * FROM operations;\n"; };
 exports.insertOperation = function (_a) {
     var status = _a.status, properties = _a.properties, created_by = _a.created_by;
-    return sql_template_strings_1.default(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  INSERT INTO users (status, properties, created_by)\n  VALUES\n  (", ", ", ", ", ");\n"], ["\n  INSERT INTO users (status, properties, created_by)\n  VALUES\n  (", ", ", ", ", ");\n"])), status, properties, created_by);
+    return sql_template_strings_1.default(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  INSERT INTO operations (status, properties, created_by)\n  VALUES\n  (", ", ", ", ", ");\n"], ["\n  INSERT INTO operations (status, properties, created_by)\n  VALUES\n  (", ", ", ", ", ");\n"])), status, properties, created_by);
 };
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
 //# sourceMappingURL=query.js.map

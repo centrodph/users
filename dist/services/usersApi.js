@@ -59,12 +59,11 @@ exports.createUser = function (request, response) { return __awaiter(void 0, voi
                 return [4 /*yield*/, setup_1.db.query(query_1.insertUser(request.body))];
             case 1:
                 result = _a.sent();
-                console.log(result);
                 response.send(result);
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
-                response.status(500).send({ message: error_1.detail, error: error_1 });
+                response.status(500).send({ error: error_1, message: error_1.detail });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

@@ -8,10 +8,11 @@ export const getOperations = async (request, response) => {
 
 export const createOperation = async (request, response) => {
   try {
-    const result = await db.query(insertOperation(request.body));
-    console.log(result);
+    const result = await db.query(
+      insertOperation({ ...request.body, created_by: request.user.id }),
+    );
     response.send(result);
   } catch (error) {
-    response.status(500).send({ message: error.detail, error });
+    response.status(500).send({ error, message: error.detail });
   }
 };

@@ -43,7 +43,7 @@ export const insertOperation = ({
   properties,
   created_by,
 }: OperationCreate) => sql`
-  INSERT INTO users (status, properties, created_by)
+  INSERT INTO operations (status, properties, created_by)
   VALUES
   (${status}, ${properties}, ${created_by});
 `;
