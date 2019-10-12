@@ -6,16 +6,15 @@ module.exports.clearTables = `
   DROP TABLE  IF EXISTS operations CASCADE;
   DROP SEQUENCE  IF EXISTS operations_id_seq;
   DROP INDEX  IF EXISTS operations_idx;
-
-  DROP TYPE IF EXISTS  accesstype;
-  DROP TYPE IF EXISTS  userstatus;
-  DROP TYPE IF EXISTS datastatus;
 `;
 
 module.exports.createTypes = `
-  CREATE TYPE  IF NOT EXISTS accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
-  CREATE TYPE  IF NOT EXISTS userstatus AS ENUM ('ACTIVE', 'INACTIVE');
-  CREATE TYPE  IF NOT EXISTS atastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
+  DROP TYPE IF EXISTS  accesstype;
+  DROP TYPE IF EXISTS  userstatus;
+  DROP TYPE IF EXISTS datastatus;
+  CREATE TYPE  accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
+  CREATE TYPE  userstatus AS ENUM ('ACTIVE', 'INACTIVE');
+  CREATE TYPE  datastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
 `;
 
 module.exports.createUsers = `

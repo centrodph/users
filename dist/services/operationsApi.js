@@ -50,4 +50,24 @@ exports.getOperations = function (request, response) { return __awaiter(void 0, 
         }
     });
 }); };
+exports.createOperation = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var result, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, setup_1.db.query(query_1.insertOperation(request.body))];
+            case 1:
+                result = _a.sent();
+                console.log(result);
+                response.send(result);
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                response.status(500).send({ message: error_1.detail, error: error_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 //# sourceMappingURL=operationsApi.js.map

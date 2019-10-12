@@ -48,34 +48,33 @@ var setupDB = function () { return __awaiter(void 0, void 0, void 0, function ()
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 8, , 9]);
+                _a.trys.push([0, 7, , 8]);
                 return [4 /*yield*/, db.connect()];
             case 1:
                 client = _a.sent();
-                return [4 /*yield*/, client.query(clearTables)];
-            case 2:
-                _a.sent();
+                // await client.query(clearTables);
                 return [4 /*yield*/, client.query(createTypes)];
-            case 3:
+            case 2:
+                // await client.query(clearTables);
                 _a.sent();
                 return [4 /*yield*/, client.query(createUsers)];
-            case 4:
+            case 3:
                 _a.sent();
                 return [4 /*yield*/, client.query(createOperations)];
-            case 5:
+            case 4:
                 _a.sent();
                 return [4 /*yield*/, client.query(createIndexUsers)];
-            case 6:
+            case 5:
                 _a.sent();
                 return [4 /*yield*/, client.query(addBasicUsers)];
-            case 7:
+            case 6:
                 _a.sent();
-                return [3 /*break*/, 9];
-            case 8:
+                return [3 /*break*/, 8];
+            case 7:
                 error_1 = _a.sent();
                 console.log(error_1);
-                return [3 /*break*/, 9];
-            case 9: return [2 /*return*/];
+                return [3 /*break*/, 8];
+            case 8: return [2 /*return*/];
         }
     });
 }); };

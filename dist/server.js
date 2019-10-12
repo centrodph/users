@@ -16,6 +16,7 @@ require("./services/passport");
 var dummyApi_1 = require("./services/dummyApi");
 var userLogin_1 = require("./services/userLogin");
 var usersApi_1 = require("./services/usersApi");
+var operationsApi_1 = require("./services/operationsApi");
 var app = express_1.default();
 var port = process.env.PORT || 5000;
 /**
@@ -39,5 +40,7 @@ app.get("/users/:id", passport_1.default.authenticate("jwt", { session: false })
 /**
  * Operations
  */
+app.get("/operations", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR, accessType_1.ACCESS_TYPE.OPERATOR]), operationsApi_1.getOperations);
+app.post("/operations", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR, accessType_1.ACCESS_TYPE.OPERATOR]), operationsApi_1.createOperation);
 app.listen(port);
 //# sourceMappingURL=server.js.map
