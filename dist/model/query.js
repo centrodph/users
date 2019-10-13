@@ -24,7 +24,7 @@ exports.insertUser = function (_a) {
 /**
  * Operations
  */
-exports.listOperations = function () { return "\n SELECT * FROM operations;\n"; };
+exports.listOperations = function () { return "\n SELECT op.*, us.email, us.id as user_id FROM operations op LEFT JOIN users us ON op.created_by = us.id;\n"; };
 exports.insertOperation = function (_a) {
     var status = _a.status, properties = _a.properties, created_by = _a.created_by;
     return sql_template_strings_1.default(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  INSERT INTO operations (status, properties, created_by)\n  VALUES\n  (", ", ", ", ", ");\n"], ["\n  INSERT INTO operations (status, properties, created_by)\n  VALUES\n  (", ", ", ", ", ");\n"])), status, properties, created_by);

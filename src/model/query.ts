@@ -35,7 +35,7 @@ export const insertUser = ({
  * Operations
  */
 export const listOperations = () => `
- SELECT * FROM operations;
+ SELECT op.*, us.email, us.id as user_id FROM operations op LEFT JOIN users us ON op.created_by = us.id;
 `;
 
 export const insertOperation = ({
