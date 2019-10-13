@@ -36,11 +36,12 @@ app.post("/auth", userLogin_1.userLoginPassport);
 app.post("/user", userLogin_1.userLogin);
 app.get("/users", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR]), usersApi_1.getUsers);
 app.post("/users", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN]), usersApi_1.createUser);
-app.get("/users/:id", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR]), usersApi_1.editUser);
+app.patch("/user/:id/status", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR]), usersApi_1.editUserStatus);
 /**
  * Operations
  */
 app.get("/operations", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR, accessType_1.ACCESS_TYPE.OPERATOR]), operationsApi_1.getOperations);
 app.post("/operations", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR, accessType_1.ACCESS_TYPE.OPERATOR]), operationsApi_1.createOperation);
+app.put("/operation/:id", passport_1.default.authenticate("jwt", { session: false }), acl_1.aclBasic([accessType_1.ACCESS_TYPE.ADMIN, accessType_1.ACCESS_TYPE.SUPERVISOR]), operationsApi_1.editOperation);
 app.listen(port);
 //# sourceMappingURL=server.js.map

@@ -5,3 +5,8 @@ export interface OperationCreate {
   properties: JSON;
   created_by: number;
 }
+export interface OperationEdit {
+  id: number;
+  status: OPERATION_STATUS;
+  properties: JSON;
+}

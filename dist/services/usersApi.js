@@ -69,15 +69,22 @@ exports.createUser = function (request, response) { return __awaiter(void 0, voi
         }
     });
 }); };
-exports.editUser = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var rows;
+exports.editUserStatus = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, setup_1.db.query(query_1.listUsers())];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, setup_1.db.query(query_1.updateUserStatus({ id: request.params.id, status: request.body.status }))];
             case 1:
                 rows = (_a.sent()).rows;
                 response.send(rows);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                response.status(500).send({ error: error_2, message: error_2.detail });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

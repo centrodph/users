@@ -9,12 +9,12 @@ module.exports.clearTables = `
 `;
 
 module.exports.createTypes = `
-  DROP TYPE IF EXISTS  accesstype;
-  DROP TYPE IF EXISTS  userstatus;
-  DROP TYPE IF EXISTS datastatus;
-  CREATE TYPE  accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
-  CREATE TYPE  userstatus AS ENUM ('ACTIVE', 'INACTIVE');
-  CREATE TYPE  datastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
+  -- DROP TYPE IF EXISTS  accesstype;
+  -- DROP TYPE IF EXISTS  userstatus;
+  -- DROP TYPE IF EXISTS datastatus;
+  CREATE TYPE  IF NOT EXISTS accesstype AS ENUM ('ADMIN', 'SUPERVISOR', 'OPERATOR');
+  CREATE TYPE  IF NOT EXISTS userstatus AS ENUM ('ACTIVE', 'INACTIVE');
+  CREATE TYPE  IF NOT EXISTS datastatus AS ENUM ('PENDING', 'EXECUTING', 'EXECUTED');
 `;
 
 module.exports.createUsers = `

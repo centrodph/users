@@ -6,3 +6,7 @@ export interface UserCreate {
   access: ACCESS_TYPE;
   status: USER_STATUS;
 }
+export interface UserUpdateStatus {
+  id: number;
+  status: USER_STATUS;
+}
