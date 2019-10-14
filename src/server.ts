@@ -11,7 +11,12 @@ import "./services/passport";
 import { getAuthor, getTest } from "./services/dummyApi";
 import { userLogin, userLoginPassport } from "./services/userLogin";
 import { getUsers, createUser, editUserStatus } from "./services/usersApi";
-import { getOperations, createOperation, editOperation } from "./services/operationsApi";
+import {
+  getOperations,
+  createOperation,
+  editOperation,
+} from "./services/operationsApi";
+import { getStats } from "./services/apiStats";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -36,19 +41,19 @@ app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  getUsers,
+  getUsers
 );
 app.post(
   "/users",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN]),
-  createUser,
+  createUser
 );
 app.patch(
   "/user/:id/status",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  editUserStatus,
+  editUserStatus
 );
 
 /**
@@ -58,19 +63,25 @@ app.get(
   "/operations",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR, ACCESS_TYPE.OPERATOR]),
-  getOperations,
+  getOperations
 );
 app.post(
   "/operations",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR, ACCESS_TYPE.OPERATOR]),
-  createOperation,
+  createOperation
 );
 app.put(
   "/operation/:id",
   passport.authenticate("jwt", { session: false }),
   aclBasic([ACCESS_TYPE.ADMIN, ACCESS_TYPE.SUPERVISOR]),
-  editOperation,
+  editOperation
 );
 
+app.get(
+  "/stats",
+  passport.authenticate("jwt", { session: false }),
+  aclBasic([ACCESS_TYPE.ADMIN]),
+  getStats
+);
 app.listen(port);

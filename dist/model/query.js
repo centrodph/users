@@ -37,5 +37,7 @@ exports.updateOperation = function (_a) {
     var id = _a.id, status = _a.status, properties = _a.properties;
     return sql_template_strings_1.default(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  UPDATE operations SET status = ", ", properties = ", " WHERE id=", ";\n"], ["\n  UPDATE operations SET status = ", ", properties = ", " WHERE id=", ";\n"])), status, properties, id);
 };
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
+exports.getUsersPerStatus = function () { return sql_template_strings_1.default(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  SELECT count(*), status FROM users GROUP BY status;\n"], ["\n  SELECT count(*), status FROM users GROUP BY status;\n"]))); };
+exports.getOperationsPerDay = function () { return sql_template_strings_1.default(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  SELECT count(*), to_char(created_at, 'YYYY-MM-DD') as date FROM operations GROUP BY to_char(created_at, 'YYYY-MM-DD') ORDER  BY date ASC;\n"], ["\n  SELECT count(*), to_char(created_at, 'YYYY-MM-DD') as date FROM operations GROUP BY to_char(created_at, 'YYYY-MM-DD') ORDER  BY date ASC;\n"]))); };
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8;
 //# sourceMappingURL=query.js.map

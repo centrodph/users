@@ -8,7 +8,7 @@ export const listUsers = () => `
 
 export const loginUser = ({
   email,
-  password,
+  password
 }: {
   email: string;
   password?: string;
@@ -24,7 +24,7 @@ export const insertUser = ({
   email,
   password,
   access,
-  status,
+  status
 }: UserCreate) => sql`
   INSERT INTO users (email, password, access, status)
   VALUES
@@ -45,7 +45,7 @@ export const listOperations = () => `
 export const insertOperation = ({
   status,
   properties,
-  created_by,
+  created_by
 }: OperationCreate) => sql`
   INSERT INTO operations (status, properties, created_by)
   VALUES
@@ -55,7 +55,15 @@ export const insertOperation = ({
 export const updateOperation = ({
   id,
   status,
-  properties,
+  properties
 }: OperationEdit) => sql`
   UPDATE operations SET status = ${status}, properties = ${properties} WHERE id=${id};
+`;
+
+export const getUsersPerStatus = () => sql`
+  SELECT count(*), status FROM users GROUP BY status;
+`;
+
+export const getOperationsPerDay = () => sql`
+  SELECT count(*), to_char(created_at, 'YYYY-MM-DD') as date FROM operations GROUP BY to_char(created_at, 'YYYY-MM-DD') ORDER  BY date ASC;
 `;
